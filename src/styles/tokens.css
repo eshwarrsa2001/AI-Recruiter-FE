@@ -1,0 +1,20 @@
+:root {
+  --ink: oklch(0.96 0.005 285);
+  --ink-soft: oklch(0.78 0.02 285);
+  --paper: oklch(0.13 0.03 285);
+  --card: oklch(0.16 0.02 285 / 0.55);
+  --line: oklch(0.28 0.04 285 / 0.6);
+  --header: #ffffff;
+  --header-ink: oklch(0.28 0.06 285);
+  --header-muted: oklch(0.45 0.04 285);
+  --accent: oklch(0.62 0.24 295);
+  --accent-deep: oklch(0.52 0.22 295);
+  --danger: oklch(0.84 0.08 25);
+  --danger-bg: oklch(0.32 0.1 25 / 0.45);
+  --font-body: Inter, "Segoe UI", system-ui, sans-serif;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --radius: 16px;
+}

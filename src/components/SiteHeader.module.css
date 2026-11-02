@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 64px;
+  padding: 12px 28px;
+  border-bottom: 1px solid oklch(0.28 0.04 285 / 0.24);
+  background: var(--header);
+}
+
+@media (max-width: 640px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--space-2);
+  }
+}

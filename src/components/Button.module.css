@@ -1,0 +1,23 @@
+.button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 22px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--accent-deep);
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.block {
+  align-self: stretch;
+  width: 100%;
+}

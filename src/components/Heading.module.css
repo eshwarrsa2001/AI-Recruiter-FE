@@ -1,0 +1,28 @@
+.heading {
+  margin: 0;
+  width: 100%;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.level1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.level2 {
+  font-size: 1.5rem;
+}
+
+.accent {
+  background-image: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    oklch(0.78 0.16 295) 55%,
+    oklch(0.68 0.2 295) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
