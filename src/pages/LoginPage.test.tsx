@@ -19,6 +19,7 @@ function renderLogin(state: unknown = null) {
     <MemoryRouter initialEntries={[{ pathname: "/login", state }]}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<p>Register screen</p>} />
         <Route path="/account" element={<p>Account screen</p>} />
       </Routes>
     </MemoryRouter>,
@@ -88,6 +89,15 @@ describe("LoginPage", () => {
     saveToken("issued-token");
     renderLogin();
     expect(screen.getByText("Account screen")).toBeInTheDocument();
+    expect(login).not.toHaveBeenCalled();
+  });
+
+  test("opens registration without signing in", () => {
+    renderLogin();
+    expect(screen.getByText("Register as a Candidate")).toBeInTheDocument();
+    expect(screen.queryByText("Talent acquisition")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Register" }));
+    expect(screen.getByText("Register screen")).toBeInTheDocument();
     expect(login).not.toHaveBeenCalled();
   });
 });

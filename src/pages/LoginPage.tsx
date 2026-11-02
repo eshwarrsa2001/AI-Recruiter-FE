@@ -5,9 +5,9 @@ import { Card } from "../components/Card";
 import { FormMessage } from "../components/FormMessage";
 import { Heading } from "../components/Heading";
 import { PageCanvas } from "../components/PageCanvas";
-import { Pill } from "../components/Pill";
 import { SiteHeader } from "../components/SiteHeader";
 import { Stack } from "../components/Stack";
+import { Text } from "../components/Text";
 import { TextField } from "../components/TextField";
 import { login } from "../services/authApi";
 import { messageFor } from "../services/authErrors";
@@ -61,7 +61,6 @@ export function LoginPage() {
     <>
       <SiteHeader />
       <PageCanvas>
-        <Pill>Talent acquisition</Pill>
         <Heading accent="AI Recruiter">Sign in to</Heading>
         <Card>
           <form onSubmit={handleSubmit}>
@@ -86,6 +85,10 @@ export function LoginPage() {
               <FormMessage message={message} />
               <Button type="submit" block disabled={submitting}>
                 {submitting ? "Signing in…" : "Sign in"}
+              </Button>
+              <Text>Register as a Candidate</Text>
+              <Button type="button" variant="text" onClick={() => navigate("/register")}>
+                Register
               </Button>
             </Stack>
           </form>

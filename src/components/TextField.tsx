@@ -3,7 +3,7 @@ import styles from "./TextField.module.css";
 type TextFieldProps = {
   id: string;
   label: string;
-  type?: "email" | "password" | "text";
+  type?: "email" | "password" | "text" | "tel";
   value: string;
   autoComplete: string;
   onChange: (value: string) => void;

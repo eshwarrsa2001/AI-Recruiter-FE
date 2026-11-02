@@ -6,6 +6,10 @@
   background: var(--card);
 }
 
+.wide {
+  width: min(100%, 720px);
+}
+
 @media (max-width: 640px) {
   .card {
     padding: var(--space-3);

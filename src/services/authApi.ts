@@ -91,6 +91,27 @@ async function requestJson(path: string, init: RequestInit): Promise<unknown> {
   return body;
 }
 
+export async function registerCandidate(registration: {
+  fullName: string;
+  email: string;
+  password: string;
+  phone: string;
+  resume: File;
+}): Promise<LoginResult> {
+  const body = new FormData();
+  body.set("full_name", registration.fullName);
+  body.set("email", registration.email);
+  body.set("password", registration.password);
+  body.set("phone", registration.phone);
+  body.set("resume", registration.resume);
+  const responseBody = await requestJson("/api/v1/candidates/register/", {
+    method: "POST",
+    headers: { Accept: "application/json" },
+    body,
+  });
+  return readLoginResult(responseBody);
+}
+
 export async function login(email: string, password: string): Promise<LoginResult> {
   const body = await requestJson("/api/v1/auth/login/", {
     method: "POST",

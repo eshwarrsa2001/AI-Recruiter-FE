@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { failureMessage, fetchAccount, login, logout } from "./authApi";
+import { failureMessage, fetchAccount, login, logout, registerCandidate } from "./authApi";
 import { AuthRequestError } from "./authErrors";
 
 const fetchMock = vi.fn<typeof fetch>();
@@ -34,6 +34,57 @@ describe("failureMessage", () => {
     expect(failureMessage(null)).toBe("The request was rejected.");
     expect(failureMessage({ detail: "" })).toBe("The request was rejected.");
     expect(failureMessage({ email: [] })).toBe("The request was rejected.");
+  });
+});
+
+describe("registerCandidate", () => {
+  test("posts the candidate details and resume", async () => {
+    fetchMock.mockResolvedValue(
+      jsonResponse(201, {
+        token: "issued-token",
+        email: "ada@example.com",
+        role: "Candidate",
+      }),
+    );
+    const resume = new File(["%PDF-1.4"], "ada.pdf", { type: "application/pdf" });
+    await expect(
+      registerCandidate({
+        fullName: "Ada Lovelace",
+        email: "ada@example.com",
+        password: "secret",
+        phone: "+1 555 0100",
+        resume,
+      }),
+    ).resolves.toEqual({
+      token: "issued-token",
+      email: "ada@example.com",
+      role: "Candidate",
+    });
+    const init = fetchMock.mock.calls[0][1];
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/v1/candidates/register/");
+    expect(init?.method).toBe("POST");
+    expect(init?.headers).toEqual({ Accept: "application/json" });
+    expect(init?.body).toBeInstanceOf(FormData);
+    const body = init?.body as FormData;
+    expect(body.get("full_name")).toBe("Ada Lovelace");
+    expect(body.get("email")).toBe("ada@example.com");
+    expect(body.get("password")).toBe("secret");
+    expect(body.get("phone")).toBe("+1 555 0100");
+    expect(body.get("resume")).toBe(resume);
+  });
+
+  test("raises the detail from a rejected registration", async () => {
+    fetchMock.mockResolvedValue(jsonResponse(400, { detail: "Choose a resume." }));
+    const resume = new File(["%PDF-1.4"], "ada.pdf", { type: "application/pdf" });
+    await expect(
+      registerCandidate({
+        fullName: "Ada Lovelace",
+        email: "ada@example.com",
+        password: "secret",
+        phone: "+1 555 0100",
+        resume,
+      }),
+    ).rejects.toThrow("Choose a resume.");
   });
 });
 

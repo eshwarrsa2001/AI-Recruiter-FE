@@ -21,3 +21,41 @@
   align-self: stretch;
   width: 100%;
 }
+
+.outline {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 12px 22px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.outline:hover:not(:disabled) {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.outline:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.text {
+  border: 0;
+  background: transparent;
+  padding: 8px 4px;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.text:hover:not(:disabled) {
+  color: var(--accent-deep);
+}
+
+.text:disabled {
+  cursor: default;
+  opacity: 0.6;
+}

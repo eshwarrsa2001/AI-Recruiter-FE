@@ -9,6 +9,7 @@ vi.mock("../services/authApi", () => ({
   fetchAccount: vi.fn(),
   login: vi.fn(),
   logout: vi.fn(),
+  registerCandidate: vi.fn(),
 }));
 
 beforeEach(() => {
@@ -40,5 +41,10 @@ describe("AppRoutes", () => {
   test("registers the login and account screens", () => {
     renderAt("/login");
     expect(screen.getByRole("heading", { name: "Sign in" })).toBeInTheDocument();
+  });
+
+  test("opens candidate registration", () => {
+    renderAt("/register");
+    expect(screen.getByRole("heading", { name: "Register" })).toBeInTheDocument();
   });
 });
